@@ -8,10 +8,11 @@ docker pull mysql
 \
 **Step 2:** Buat Container mysql dan Set Passwordnya
 ```bash
-docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
+docker run --name nama-containernya -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
 ```
-**some-mysql** = nama containernya\
-**my-secret-pw** = buat password untuk akses mysql
+**nama-containernya** = nama containernya sesuai yang diinginkan\
+**my-secret-pw** = buat password untuk akses mysql\
+**tag** = ganti menjadi **latest** untuk version terakhir
 
 \
 **Step 3:** Buat Container mysql dan Set Passwordnya
@@ -67,7 +68,32 @@ Query OK, 1 row affected (0.02 sec)
 ```
 
 \
-**Step 4:** 
+**Step 4:** Buat Networknya
 ```bash
+docker network create nama-networknya
+```
 
+contoh hasil outputnya:
+```bash
+1ef833a4aed62361ca1f2053bc7cd0cd4a0f3971a041bc87a85aedbddafcc3ee
+```
+
+**Step 5:** Check Networknya
+```bash
+docker network ls
+```
+\
+contoh outputnya:
+```bash
+NETWORK ID          NAME                DRIVER              SCOPE
+487f2e83e4d7        bridge              bridge              local
+20c07d3253a0        host                host                local
+1ef833a4aed6        nama-networknya     bridge              local
+c303de725330        none                null                local
+```
+
+
+**Step 6:** Connect a container to a network
+```bash
+docker network connect nama-networknya nama-containernya
 ```
